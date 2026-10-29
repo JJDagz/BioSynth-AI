@@ -1,0 +1,696 @@
+[
+  {
+    "id": "love",
+    "name": "LOVE Protocol",
+    "category": "Cooperation",
+    "analogy": "Two neighbors share a garden. Forgive an accidental broken tool, but set boundaries if one neighbor repeatedly takes the harvest.",
+    "problem": "When should an agent cooperate, punish or forgive in repeated encounters?",
+    "mechanism": "The archived design describes an eight-action trust window, tolerance for occasional defections and a conditional forgiveness branch. Actions are cooperate or defect. Track each player’s payoff and cooperation separately; a policy can improve one while harming the other.",
+    "formula": "c = N(C) / N; π = Σ rₜ / N",
+    "variables": [
+      [
+        "c",
+        "Fraction of cooperative actions (0–1)"
+      ],
+      [
+        "N(C)",
+        "Number of cooperative actions"
+      ],
+      [
+        "N",
+        "Total actions or rounds in the relevant measure"
+      ],
+      [
+        "π",
+        "Mean payoff per round, in game units"
+      ],
+      [
+        "rₜ",
+        "Payoff earned in round t"
+      ]
+    ],
+    "example": "Teaching example, not a LOVE run: payoffs 3, 3, 0, 5 give π = 11 / 4 = 2.75 game units. If 3 of 4 actions cooperate, c = 75%. The two measures answer different questions.",
+    "achieved": "The original website documents a synthetic cooperation/payoff trade-off: more cooperation accompanied lower individual payoff. Its exact outputs have not been reproduced for this release.",
+    "unverified": "Original synthetic scripts, seeds and raw outputs are absent here. The newer unfavorable evolutionary outcome is user-reported and awaits original-source inspection and independent reruns.",
+    "failure": "An opponent can exploit predictable forgiveness. Cooperation is not an evolutionary stability proof.",
+    "value": "Potentially fewer disputes and failed partnerships. Measure avoided incident cost minus monitoring, concessions and implementation costs; never convert game points directly to dollars.",
+    "experiment": "Obtain the original archive; freeze policies, payoff matrix and noise; run matched seeds against cooperative, retaliating and exploitative opponents, including invasion tests.",
+    "baseline": "Tit-for-Tat, always defect and a strong forgiving baseline, with identical noise and opponents.",
+    "metric": "Paired mean payoff, cooperation fraction, worst-opponent loss and uncertainty across seeds.",
+    "criterion": "Reject an advantage claim if the confidence interval for payoff improvement includes zero or adversarial losses exceed a preregistered safety limit.",
+    "steps": [
+      "Specify actions, payoff rules and forgiveness exactly.",
+      "Replay equal-length encounters with matched random seeds.",
+      "Compare cooperation, individual payoff and exploitability separately."
+    ],
+    "sources": [
+      {
+        "label": "Original project description (archived)",
+        "url": "archive/index-2026-10-29.html#love"
+      }
+    ],
+    "stage": "Reported simulation",
+    "validated": false,
+    "sourceNote": "Original description is available; executable project research and raw outputs are not supplied in this repository. Website teaching models are separate implementations.",
+    "priorArt": []
+  },
+  {
+    "id": "redemption",
+    "name": "Redemption Amplifier",
+    "category": "Cooperation",
+    "analogy": "A library restores borrowing privileges after reliable behavior, while preventing someone from repeatedly cheating and resetting their record.",
+    "problem": "How much evidence should restore trust after a violation?",
+    "mechanism": "A candidate rule subtracts a severity penalty from a bounded trust score, then rewards verified reliable actions. A restoration multiplier is a tunable hypothesis, not a proven fairness mechanism.",
+    "formula": "T′ = min(1, max(0, T − s + k·r))",
+    "variables": [
+      [
+        "T, T′",
+        "Trust score before and after a review (0–1)"
+      ],
+      [
+        "s",
+        "Severity penalty in score units"
+      ],
+      [
+        "k",
+        "Restoration multiplier, nonnegative"
+      ],
+      [
+        "r",
+        "Verified recovery evidence in score units"
+      ]
+    ],
+    "example": "Illustrative rule: T = 0.4, s = 0.2, k = 1.5 and r = 0.1 give T′ = 0.35. A larger multiplier restores privileges faster but can also help repeat offenders.",
+    "achieved": "The archive describes a multiplier concept and a separate simplified ablation claim. They must not be treated as the same tested algorithm.",
+    "unverified": "No supplied run establishes that the multiplier reduces exploitation or improves fairness. The toy rule here only explains the mechanism.",
+    "failure": "Alternating misconduct and minimum recovery can become a profitable strategy.",
+    "value": "Compare avoided false exclusions against repeat fraud, review labor and reinstatement costs. Recovery speed alone is not economic success.",
+    "experiment": "Freeze this candidate rule and simulate repeated offenders alongside genuinely reformed agents; vary multiplier and observation error.",
+    "baseline": "Permanent exclusion, fixed probation and recovery without amplification.",
+    "metric": "Repeat-offense loss, false exclusion rate and median time to safe restoration.",
+    "criterion": "Reject if faster recovery raises total loss or false exclusion beyond a declared tolerance.",
+    "steps": [
+      "Define the violation and what counts as recovery evidence.",
+      "Apply bounded penalties and controlled restoration.",
+      "Test whether repeated cheating becomes more attractive."
+    ],
+    "sources": [
+      {
+        "label": "Original project description (archived)",
+        "url": "archive/index-2026-10-29.html#redemption"
+      }
+    ],
+    "stage": "Proposed",
+    "validated": false,
+    "sourceNote": "Original description is available; executable project research and raw outputs are not supplied in this repository. Website teaching models are separate implementations.",
+    "priorArt": []
+  },
+  {
+    "id": "biosynth",
+    "name": "BioSynth.AI",
+    "category": "AI systems",
+    "analogy": "A librarian gathers evidence, a scientist proposes an explanation and a skeptic checks it. They all leave notes you can inspect.",
+    "problem": "Can automated research produce more supported answers per hour?",
+    "mechanism": "Keep a claim ledger with source passages, alternative explanations and executable checks. A verifier marks unsupported claims and a human resolves conflicts before publication.",
+    "formula": "q = S / C; cost_correct = K / V",
+    "variables": [
+      [
+        "q",
+        "Supported-claim fraction"
+      ],
+      [
+        "S",
+        "Claims supported by inspected sources"
+      ],
+      [
+        "C",
+        "Total factual claims reviewed"
+      ],
+      [
+        "K",
+        "Total research and review cost in dollars"
+      ],
+      [
+        "V",
+        "Independently accepted correct answers"
+      ]
+    ],
+    "example": "If 18 of 20 checked claims are supported, q = 90%. If a workflow costs $60 and produces 15 accepted answers, cost_correct = $4. Neither number is a measured BioSynth result.",
+    "achieved": "This repository implements an educational website and arithmetic demos. The earlier site describes recovered research components, but does not include them.",
+    "unverified": "An end-to-end autonomous research engine and a measured accuracy advantage are not established by this checkout.",
+    "failure": "Agents can repeat the same unsupported claim; many citations can still fail to support the conclusion.",
+    "value": "Measure cost per accepted answer, including source retrieval, inference, correction and reviewer time. Count work only after verification.",
+    "experiment": "Create a frozen set of answerable research questions and source snapshots; blind reviewers to the workflow used.",
+    "baseline": "One model with retrieval and the same time, sources and reviewer budget.",
+    "metric": "Source support, correct answers, correction minutes and full dollars per accepted answer.",
+    "criterion": "Reject superiority if quality does not improve at equal total cost, or if hidden review labor explains the gain.",
+    "steps": [
+      "Attach every factual claim to a source passage.",
+      "Generate a rival explanation and a check that could distinguish it.",
+      "Publish accepted results with unresolved claims still visible."
+    ],
+    "sources": [
+      {
+        "label": "Original project description (archived)",
+        "url": "archive/index-2026-10-29.html#biosynth"
+      }
+    ],
+    "stage": "Proposed",
+    "validated": false,
+    "sourceNote": "Original description is available; executable project research and raw outputs are not supplied in this repository. Website teaching models are separate implementations.",
+    "priorArt": []
+  },
+  {
+    "id": "apex",
+    "name": "APEX",
+    "category": "Decision science",
+    "analogy": "A coach chooses the best training plan that fits the budget, schedule and safety rules.",
+    "problem": "Which feasible decision offers the most value under real constraints?",
+    "mechanism": "Define a measurable objective, enumerate feasible decisions and choose the highest-value one. Hard limits constrain the choice; arbitrary weighted scores require explicit justification.",
+    "formula": "maxₓ V(x), subject to C(x) ≤ B and H(x) ≤ L",
+    "variables": [
+      [
+        "x",
+        "A candidate decision or resource allocation"
+      ],
+      [
+        "V(x)",
+        "Value of the decision in declared units"
+      ],
+      [
+        "C(x)",
+        "Cost of the decision"
+      ],
+      [
+        "B",
+        "Available budget"
+      ],
+      [
+        "H(x), L",
+        "Resource usage and its hard limit"
+      ]
+    ],
+    "example": "Plan A costs $80 and has modeled benefit $120; plan B costs $110 and benefit $170. With budget B = $100, only A is feasible. Its modeled net is $40, not the $60 of infeasible B.",
+    "achieved": "A conceptual optimization framework is described. Constrained optimization is established mathematics; naming a framework does not establish a new theorem.",
+    "unverified": "No supplied comparative benchmark shows APEX beats existing decision rules.",
+    "failure": "Incorrect objectives optimize the wrong thing; inconsistent units make weighted rankings meaningless.",
+    "value": "Incremental realized net value relative to the best feasible alternative, including decision and oversight costs.",
+    "experiment": "Choose one scheduling or procurement dataset; preregister objective and constraints, then compare on held-out cases.",
+    "baseline": "Existing practice, a simple greedy rule and a conventional optimization solver.",
+    "metric": "Feasible net value, constraint violations and decision time.",
+    "criterion": "Reject if a simpler baseline matches value at lower cost or any hard safety constraint is violated.",
+    "steps": [
+      "Choose the outcome and units before scoring candidates.",
+      "Remove decisions that violate budget or safety limits.",
+      "Compare the best feasible decision with a simple baseline."
+    ],
+    "sources": [
+      {
+        "label": "Original project description (archived)",
+        "url": "archive/index-2026-10-29.html#apex"
+      }
+    ],
+    "stage": "Proposed",
+    "validated": false,
+    "sourceNote": "Original description is available; executable project research and raw outputs are not supplied in this repository. Website teaching models are separate implementations.",
+    "priorArt": [
+      {
+        "label": "Background: Boyd & Vandenberghe, Convex Optimization (2004)",
+        "url": "https://web.stanford.edu/~boyd/cvxbook/",
+        "note": "Author-hosted textbook on constrained convex optimization. Background mathematics; not evidence that APEX is superior or that every APEX problem is convex."
+      }
+    ]
+  },
+  {
+    "id": "forge",
+    "name": "FORGE",
+    "category": "Decision science",
+    "analogy": "A bridge closure can send traffic pressure through many neighborhoods. A supplier disruption can spread through a company network.",
+    "problem": "Where might semiconductor supply-chain disruption create indirect exposure?",
+    "mechanism": "A directed graph connects pressure sources to exposed targets. Normalize incoming edge weights into matrix P, inject scenario b and iterate a damped propagation rule. Scores are illustrative unsigned exposures.",
+    "formula": "x(t+1) = (1 − d)b + dP x(t)",
+    "variables": [
+      [
+        "x(t)",
+        "Vector of illustrative exposure scores at iteration t"
+      ],
+      [
+        "b",
+        "Scenario source vector, in score units"
+      ],
+      [
+        "d",
+        "Continuation parameter (0–0.95)"
+      ],
+      [
+        "P",
+        "Nonnegative matrix with every row sum at most 1"
+      ],
+      [
+        "t",
+        "Iteration index"
+      ]
+    ],
+    "example": "Two-node toy: b = (1, 0), d = 0.5 and P₂₁ = 0.8, with all other entries zero. The fixed point is x₁ = 0.5 and x₂ = 0.2. A score of 0.2 is neither 20% loss nor a 20% probability.",
+    "achieved": "Public MODEL.md was inspected. It specifies normalization, convergence bounds and the distinction between relationship evidence and assumed coefficients.",
+    "unverified": "The external engine was not executed in this release. Edge weights are not calibrated loss estimates or validated stock forecasts.",
+    "failure": "A disclosed supplier relationship does not reveal dependence, substitution or inventory buffers.",
+    "value": "Prioritize due diligence and resilience analysis. Measure whether scenario-guided decisions reduce disruption costs compared with ordinary review.",
+    "experiment": "Freeze pre-event graphs and compare exposure rankings around documented disruptions, without using facts published after each event.",
+    "baseline": "Direct-supplier-only exposure and simple industry concentration rankings.",
+    "metric": "Rank calibration and decision usefulness across held-out historical events.",
+    "criterion": "Reject predictive claims if rankings fail to improve on the direct-only baseline; do not infer dollar losses without calibration.",
+    "steps": [
+      "Document each relationship and separate assumed weights.",
+      "Propagate a declared disruption through a bounded network.",
+      "Check sensitivity and compare historical event rankings."
+    ],
+    "sources": [
+      {
+        "label": "FORGE repository",
+        "url": "https://github.com/JJDagz/forge-semiconductor-risk-lab"
+      },
+      {
+        "label": "Inspected model specification",
+        "url": "https://github.com/JJDagz/forge-semiconductor-risk-lab/blob/main/docs/MODEL.md"
+      }
+    ],
+    "stage": "Source inspected",
+    "validated": false,
+    "sourceNote": "Public source inspected on 2026-10-29. Source availability is not independent reproduction or field validation.",
+    "priorArt": []
+  },
+  {
+    "id": "qbuy",
+    "name": "Q-Branch Purchasing",
+    "category": "Operations",
+    "analogy": "A $75 item arriving after your trip can cost more in lost use than a $90 item ready today.",
+    "problem": "How should price, delivery time and uncertainty influence a purchase?",
+    "mechanism": "Add acquisition costs to the opportunity cost of waiting. Treat delivery probability as an assumption to calibrate. Missing arrival information is unknown risk, never evidence of safe delivery.",
+    "formula": "C = P + S + T + R + V + d·u",
+    "variables": [
+      [
+        "C",
+        "Total economic acquisition cost ($)"
+      ],
+      [
+        "P, S, T",
+        "Price, shipping and tax ($)"
+      ],
+      [
+        "R, V",
+        "Expected repair and pickup travel cost ($)"
+      ],
+      [
+        "d",
+        "Days until usable"
+      ],
+      [
+        "u",
+        "Value of earlier use ($/day)"
+      ]
+    ],
+    "example": "With other costs set to zero, shipped option costs $75 + 5 days × $4/day = $95. Local pickup costs $90 + 0 = $90. Local has $5 lower modeled economic cost, not $5 proven cash savings.",
+    "achieved": "Public Python source was inspected: it implements acquisition cost and a delivery-window assumption.",
+    "unverified": "Actual purchasing improvements and delivery calibration remain unverified. The source defaults unknown late risk to zero; users must not interpret that as certainty.",
+    "failure": "Assumed delivery windows and daily value can dominate the ranking. A point estimate hides uncertainty.",
+    "value": "Compare missed deadlines, expediting, repair costs and user-valued waiting against the price-only choice.",
+    "experiment": "Collect de-identified purchases with predicted and actual arrival dates; evaluate rankings and deadline probabilities.",
+    "baseline": "Lowest posted price and a simple deadline-screened price rule.",
+    "metric": "Total observed cost, deadline misses and probability calibration.",
+    "criterion": "Reject if adjusted choices do not reduce held-out cost or deadline misses relative to simple rules.",
+    "steps": [
+      "List all cash costs and the value of earlier use.",
+      "Estimate arrival uncertainty without filling unknowns with zero.",
+      "Compare total economic cost and audit actual outcomes."
+    ],
+    "sources": [
+      {
+        "label": "Inspected purchasing engine",
+        "url": "https://github.com/JJDagz/Q-Branch/blob/main/src/qbranch/engine.py"
+      },
+      {
+        "label": "Q-Branch repository",
+        "url": "https://github.com/JJDagz/Q-Branch"
+      }
+    ],
+    "stage": "Source inspected",
+    "validated": false,
+    "sourceNote": "Public source inspected on 2026-10-29. Source availability is not independent reproduction or field validation.",
+    "priorArt": []
+  },
+  {
+    "id": "otsa",
+    "name": "OTSA",
+    "category": "Decision science",
+    "analogy": "An investing GPS must include tolls, rough roads and taxes when comparing routes.",
+    "problem": "Can an investment policy improve after-cost, after-tax outcomes at comparable risk?",
+    "mechanism": "Proposed regime estimation and portfolio rules select trades under risk and tax-lot constraints. Tax-aware means keeping track of the acquisition cost and holding period of each lot; no current tax rate is assumed here.",
+    "formula": "G_net = G_gross − F − S − T",
+    "variables": [
+      [
+        "G_net, G_gross",
+        "Net and gross investment gain ($)"
+      ],
+      [
+        "F",
+        "Fees ($)"
+      ],
+      [
+        "S",
+        "Slippage: execution cost relative to the assumed price ($)"
+      ],
+      [
+        "T",
+        "Modeled tax cost ($), supplied as a scenario"
+      ]
+    ],
+    "example": "Illustrative arithmetic: $1,000 gross gain − $80 fees − $70 execution cost − $200 hypothetical tax = $650 net gain. This says nothing about OTSA profitability or current tax treatment.",
+    "achieved": "An investment research design is described in the archive. No verified trading record is supplied.",
+    "unverified": "Profitability, generalization, tax correctness and out-of-sample performance are unverified.",
+    "failure": "Future information leakage, repeated tuning and unrealistic fills can create fictional backtest profits.",
+    "value": "Compare after-cost, after-tax outcomes and drawdowns at matched risk. Include data, compute, turnover and review costs.",
+    "experiment": "Freeze strategy and point-in-time dataset; retain a genuinely untouched test interval and run a cost-sensitive walk-forward evaluation.",
+    "baseline": "Low-turnover benchmark portfolio under the same cost and tax assumptions.",
+    "metric": "Net return, drawdown, turnover, benchmark difference and uncertainty.",
+    "criterion": "Reject superiority if held-out advantage disappears under realistic cost sensitivity or cannot survive correction for repeated trials.",
+    "steps": [
+      "Freeze the strategy before viewing the evaluation period.",
+      "Apply fees, execution frictions and declared tax assumptions.",
+      "Compare net results at similar risk and report losing periods."
+    ],
+    "sources": [
+      {
+        "label": "Original project description (archived)",
+        "url": "archive/index-2026-10-29.html#otsa"
+      }
+    ],
+    "stage": "Proposed",
+    "validated": false,
+    "sourceNote": "Original description is available; executable project research and raw outputs are not supplied in this repository. Website teaching models are separate implementations.",
+    "priorArt": []
+  },
+  {
+    "id": "qreason",
+    "name": "Quantum-Inspired Q-Branch",
+    "category": "AI systems",
+    "analogy": "A detective keeps several explanations open and changes their confidence when new evidence arrives.",
+    "problem": "Can considering competing hypotheses improve decisions under uncertainty?",
+    "mechanism": "Generate rival explanations, collect distinguishing evidence and update beliefs. This lesson uses ordinary Bayesian probability on classical hardware; it does not implement quantum computation.",
+    "formula": "P(A|E) = p·a / (p·a + (1 − p)·b)",
+    "variables": [
+      [
+        "A, E",
+        "Candidate explanation and observed evidence"
+      ],
+      [
+        "p",
+        "Prior probability P(A)"
+      ],
+      [
+        "a",
+        "Likelihood P(E|A)"
+      ],
+      [
+        "b",
+        "Likelihood P(E|not A)"
+      ],
+      [
+        "P(A|E)",
+        "Updated probability after evidence"
+      ]
+    ],
+    "example": "With prior p = 0.4, a = 0.8 and b = 0.2, the updated probability is 0.32 / 0.44 ≈ 72.7%. These are assumed probabilities, not measured model confidence.",
+    "achieved": "A conceptual architecture is described; this release provides a classical probability teaching calculator.",
+    "unverified": "No quantum speedup, quantum mechanism or accuracy advantage over strong classical methods is established.",
+    "failure": "Correlated branches repeat mistakes; guessed likelihoods can create false confidence.",
+    "value": "Value equals avoided decision loss minus additional inference and review cost, measured at matched budgets.",
+    "experiment": "Test a frozen set of verifiable tasks using single-path and multi-hypothesis methods at equal total inference and review budgets.",
+    "baseline": "Single-path reasoning and a strong classical search or planning baseline.",
+    "metric": "Correct answers per dollar, calibration and abstention quality.",
+    "criterion": "Reject if improvements vanish at equal budget or confidence becomes less calibrated.",
+    "steps": [
+      "Keep distinct explanations and explicit initial probabilities.",
+      "Seek evidence that would differ under those explanations.",
+      "Update confidence and retain unresolved uncertainty."
+    ],
+    "sources": [
+      {
+        "label": "Original project description (archived)",
+        "url": "archive/index-2026-10-29.html#qreason"
+      }
+    ],
+    "stage": "Proposed",
+    "validated": false,
+    "sourceNote": "Original description is available; executable project research and raw outputs are not supplied in this repository. Website teaching models are separate implementations.",
+    "priorArt": [
+      {
+        "label": "Background: Thomas Bayes, An Essay… (1763)",
+        "url": "https://www.york.ac.uk/depts/maths/histstat/essay.htm",
+        "note": "University-hosted transcription of the historical primary essay on inverse probability. Historical background; not a validation of Q-Branch or its assumed likelihoods."
+      }
+    ]
+  },
+  {
+    "id": "evolution",
+    "name": "Multi-Agent Evolution",
+    "category": "Cooperation",
+    "analogy": "A village changes when successful behaviors spread, even if one friendly pair gets along well.",
+    "problem": "Which strategies survive competition, mutation and invasion?",
+    "mechanism": "Track strategy shares over generations. The teaching demo uses two-strategy discrete replicator selection: shares rise when expected payoff exceeds the population average. It is not a LOVE experiment.",
+    "formula": "p′ = p·f_A / (p·f_A + (1 − p)·f_B)",
+    "variables": [
+      [
+        "p, p′",
+        "Share of strategy A before and after selection"
+      ],
+      [
+        "f_A",
+        "A expected payoff, 4p in this toy coordination game"
+      ],
+      [
+        "f_B",
+        "B expected payoff, fixed at 3"
+      ],
+      [
+        "4, 3",
+        "Assumed game payoffs, not measured economic values"
+      ]
+    ],
+    "example": "At p = 0.6, f_A = 2.4 and f_B = 3. Average payoff is 2.76; p′ = 1.44 / 2.76 ≈ 0.522. A shrinks. It grows only above p = 0.75 under these specific rules.",
+    "achieved": "This release implements a deterministic teaching recurrence. Archived historical population claims have not been independently reproduced.",
+    "unverified": "The described newer unfavorable LOVE study requires the original repository, algorithm versions, seeds and outputs before its result can be verified.",
+    "failure": "Changing payoff rules, mutation or update mechanics changes the outcome. A curated opponent panel cannot establish invasion resistance.",
+    "value": "Explore the durability of cooperative institutions. Game payoffs remain game units; an operational value claim needs a separate field comparison.",
+    "experiment": "Obtain original LOVE evolution materials; preregister mixed populations, rare-invader tests, selection rules, noise and seed panels.",
+    "baseline": "Always defect, Tit-for-Tat and forgiving competitors under the identical selection process.",
+    "metric": "Invasion success, fixation frequency, population payoff and cooperation over seeds.",
+    "criterion": "Reject stability if a rare competitor reliably invades across the preregistered conditions.",
+    "steps": [
+      "Specify the population, payoff matrix and selection rule.",
+      "Run invasion and mutation conditions across many seeds.",
+      "Separate pairwise success from population survival."
+    ],
+    "sources": [
+      {
+        "label": "Original project description (archived)",
+        "url": "archive/index-2026-10-29.html#evolution"
+      }
+    ],
+    "stage": "Proposed",
+    "validated": false,
+    "sourceNote": "Original description is available; executable project research and raw outputs are not supplied in this repository. Website teaching models are separate implementations.",
+    "priorArt": [
+      {
+        "label": "Background: Taylor & Jonker, Evolutionary stable strategies and game dynamics (1978)",
+        "url": "https://www.sciencedirect.com/science/article/pii/0025556478900779",
+        "note": "Original evolutionary game-dynamics paper. Background theory; the site’s discrete teaching recurrence is not a reproduction of that paper or of LOVE. Publisher access may be restricted."
+      }
+    ]
+  },
+  {
+    "id": "dignity",
+    "name": "Dignity Optimization",
+    "category": "Ethics",
+    "analogy": "A school cannot improve average scores by excluding children who need help. Rights constrain the decision.",
+    "problem": "How can resource allocation improve outcomes while respecting rights?",
+    "mechanism": "Optimize a declared service outcome subject to justified minimum access, consent and safety constraints. Human dignity is a boundary on permissible decisions, not a scalar measure of human worth.",
+    "formula": "max Σ uᵢxᵢ, subject to Σ cᵢxᵢ ≤ B and xᵢ ≥ mᵢ",
+    "variables": [
+      [
+        "xᵢ",
+        "Service units allocated to group i"
+      ],
+      [
+        "uᵢ",
+        "Declared service outcome per unit, not human worth"
+      ],
+      [
+        "cᵢ",
+        "Cost per service unit ($)"
+      ],
+      [
+        "B",
+        "Available budget ($)"
+      ],
+      [
+        "mᵢ",
+        "Justified minimum service allocation"
+      ]
+    ],
+    "example": "Two groups need at least 3 sessions each. At $10 a session and budget $80, the first 6 sessions cost $60, leaving $20 for 2 additional sessions. The minimum comes from a rights process, not the equation.",
+    "achieved": "A rights-constrained allocation proposal is documented. No ethical or clinical validation is supplied.",
+    "unverified": "Consent, proxy fairness and real distributive effects need participatory evaluation before deployment.",
+    "failure": "Unjustified minimums or biased outcome measures can encode discrimination in a precise-looking model.",
+    "value": "Compare service outcomes and budget use while preserving rights. Do not assign a dollar price to dignity.",
+    "experiment": "Co-design constraints with affected groups; test adversarial cases, infeasible budgets and disparate access before any pilot.",
+    "baseline": "Current allocation and a rights-preserving rule with no optimization.",
+    "metric": "Access gaps, rights violations, service outcomes and feasibility.",
+    "criterion": "Reject any policy violating agreed rights; when the budget is infeasible, report infeasibility rather than silently relaxing rights.",
+    "steps": [
+      "Agree on rights and minimum access with affected people.",
+      "Check whether the budget can satisfy those constraints.",
+      "Compare outcomes only among ethically feasible options."
+    ],
+    "sources": [
+      {
+        "label": "Original project description (archived)",
+        "url": "archive/index-2026-10-29.html#dignity"
+      }
+    ],
+    "stage": "Proposed",
+    "validated": false,
+    "sourceNote": "Original description is available; executable project research and raw outputs are not supplied in this repository. Website teaching models are separate implementations.",
+    "priorArt": []
+  },
+  {
+    "id": "agents",
+    "name": "Autonomous AI Systems",
+    "category": "AI systems",
+    "analogy": "A restaurant team can divide jobs well, but making four people check every sandwich may cost more than it saves.",
+    "problem": "When do orchestration and local inference improve business workflow quality and cost?",
+    "mechanism": "Route tasks among models, retrieval and tools; validate outputs and require authorized human approval before consequential actions. Local inference runs a model on organization-controlled hardware, with hardware and staffing costs included.",
+    "formula": "k = (H + E + M + R) / V",
+    "variables": [
+      [
+        "k",
+        "Full cost per accepted correct task ($)"
+      ],
+      [
+        "H",
+        "Allocated hardware and hosting cost ($)"
+      ],
+      [
+        "E",
+        "Energy cost ($)"
+      ],
+      [
+        "M",
+        "Model, maintenance and integration cost ($)"
+      ],
+      [
+        "R",
+        "Human review and correction cost ($)"
+      ],
+      [
+        "V",
+        "Accepted correct tasks completed"
+      ]
+    ],
+    "example": "For an assumed batch: $30 hardware + $5 energy + $15 maintenance + $50 review = $100. If 20 tasks pass review, k = $5 per correct task. Free model weights do not make the workflow free.",
+    "achieved": "An orchestration architecture is described. This site runs locally in the browser and does not call AI services.",
+    "unverified": "Company-wide deployment, privacy properties of an actual system and superiority of local or multi-agent inference are not verified.",
+    "failure": "Errors propagate across tools; broad permissions or weak retrieval controls can expose data despite local inference.",
+    "value": "Compare correct tasks per total dollar, latency and oversight load. Include hardware utilization and amortization when comparing local and hosted models.",
+    "experiment": "Use synthetic documents and a fixed task suite; compare single-model, routed-agent and human-assisted workflows with identical acceptance criteria.",
+    "baseline": "A single capable model plus retrieval and ordinary workflow automation.",
+    "metric": "Accepted completions, error severity, human correction time, latency and full cost.",
+    "criterion": "Reject claimed efficiency if review cost or serious error rates offset the throughput gain.",
+    "steps": [
+      "Classify tasks, permissions and where information may flow.",
+      "Route to a model and verify output before tool execution.",
+      "Measure accepted work and full lifecycle cost."
+    ],
+    "sources": [
+      {
+        "label": "Original project description (archived)",
+        "url": "archive/index-2026-10-29.html#agents"
+      }
+    ],
+    "stage": "Proposed",
+    "validated": false,
+    "sourceNote": "Original description is available; executable project research and raw outputs are not supplied in this repository. Website teaching models are separate implementations.",
+    "priorArt": []
+  },
+  {
+    "id": "freight",
+    "name": "Freight RFQ Optimization",
+    "category": "Operations",
+    "analogy": "A careful assistant copies carrier quotes into the same comparison sheet, flags uncertain numbers and waits for the decision-maker to approve.",
+    "problem": "Can quotations be processed faster without changing approval rights?",
+    "mechanism": "Extract fields from email or PDF into one master Excel workbook. Logistics checks ambiguous fields and sends the comparison to the business unit. The business unit chooses; logistics books only after a recorded approval.",
+    "formula": "H = q·12·(m − a)/60; G = H·w; R = G·f; N₁ = R − O − D",
+    "variables": [
+      [
+        "q",
+        "Monthly quotations"
+      ],
+      [
+        "m, a",
+        "Manual and automated human minutes per quotation"
+      ],
+      [
+        "H",
+        "Annual released labor hours; can be negative"
+      ],
+      [
+        "w",
+        "Fully loaded labor cost ($/hour)"
+      ],
+      [
+        "G",
+        "Gross annual capacity value ($), not cash savings"
+      ],
+      [
+        "f",
+        "Realization fraction (0–1)"
+      ],
+      [
+        "R",
+        "Annual realized value ($), still an assumption until measured"
+      ],
+      [
+        "O, D",
+        "Annual operating and one-time development cost ($)"
+      ],
+      [
+        "N₁",
+        "First-year net economic value ($)"
+      ]
+    ],
+    "example": "400 monthly quotes, 15 → 4 human minutes, $35/hour and 50% realization yield 880 hours, $30,800 gross capacity and $15,400 realized value. Subtract $4,800 operating and $12,000 build cost: first-year net = −$1,400.",
+    "achieved": "Workflow design and an interactive capacity calculator are implemented in this educational release. No freight extraction engine or production booking system is included.",
+    "unverified": "Extraction accuracy, operational adoption, hours saved and actual cash savings have not been established by a measured pilot.",
+    "failure": "Wrong units, currencies, duplicate quotes or unapproved bookings can erase all time savings.",
+    "value": "Released capacity may support more work. Cash savings require evidence of avoided spending, overtime or hiring. Apply a disclosed realization fraction and count every cost.",
+    "experiment": "Use de-identified or synthetic quotations; time manual and assisted handling on matched cases and audit every field and approval transition.",
+    "baseline": "The existing one-master-workbook process with the same business-unit approval requirement.",
+    "metric": "Human minutes per quote, exact field accuracy, corrections, approval completeness and realized cost changes.",
+    "criterion": "Reject deployment if critical-field accuracy or approval compliance is below the agreed threshold, even when average processing is faster.",
+    "steps": [
+      "Extract and flag uncertain fields in the existing master workbook.",
+      "Have logistics review and the business unit approve a carrier.",
+      "Book only after approval; log time, corrections and outcomes."
+    ],
+    "sources": [
+      {
+        "label": "Original project description (archived)",
+        "url": "archive/index-2026-10-29.html#freight"
+      }
+    ],
+    "stage": "Proposed",
+    "validated": false,
+    "sourceNote": "Original description is available; executable project research and raw outputs are not supplied in this repository. Website teaching models are separate implementations.",
+    "priorArt": []
+  }
+]
